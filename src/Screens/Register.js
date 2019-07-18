@@ -11,7 +11,7 @@ import {
 
 import { h, w, WIDTH, HEIGHT, totalSize } from '../Api/Dimesion'
 
-import { register } from '../Api/Services'
+import { register, find } from '../Api/Services'
 
 import bgImage from '../Assets/background.png'
 
@@ -40,6 +40,7 @@ class Login extends Component {
 
     onPressLogin = () =>
         this.props.navigation.navigate('Login');
+        // console.warn(find())
 
     render() {
         return (

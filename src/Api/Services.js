@@ -4,19 +4,21 @@ let imgProfile = 'https://cdn.shopify.com/s/files/1/0099/9562/files/Header-Icon-
 let status = "Hello i'm using Friend Zone"
 
 export const register = async (username, email, password) => {
-    db.ref('/user').push({
-        username: username,
-        email: email,
-        imgProfile: imgProfile,
-        status: status,
-    });
 
     try {
         await firebaseapp.auth().createUserWithEmailAndPassword(email, password)
         alert('successful registration please return to login')
     } catch (error) {
         alert(error.toString(error));
+        return
     }
+    
+    db.ref('/user').push({
+        username: username,
+        email: email,
+        imgProfile: imgProfile,
+        status: status,
+    });
 }
 
 // export const login = async (email, password) => {
@@ -36,3 +38,12 @@ export const register = async (username, email, password) => {
 //         console.warn(snapshot.val())
 //     });
 // }
+
+export const find = () => {
+    db.ref('/user').on('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            let childKey = childSnapshot.val().username;
+            console.warn(childKey)
+        });
+    });
+}
