@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import { GiftedChat } from 'react-native-gifted-chat'
-import User from '../Api/User'
-import { db } from '../Api/Config'
+import user from '../Api/User'
 
 
 export default class DetailChat extends Component {
@@ -13,38 +12,37 @@ export default class DetailChat extends Component {
             text: '',
             messagesList: [],
         }
-    } 
+    }
     async componentWillMount() {
-            await db.ref('messages').child(User.id).child(this.state.uid)
-                .on('child_added', (value) => {
-                    this.setState((previousState) => {
-                        return {
-                            messagesList: GiftedChat.append(previousState.messagesList, value.val()),
-                        }
-                    })
-                    // console.warn(messages)
+        await firebase.database().ref('messages').child(user.id).child(this.state.uid)
+            .on('child_added', (value) => {
+                this.setState((previousState) => {
+                    return {
+                        messagesList: GiftedChat.append(previousState.messagesList, value.val()),
+                    }
                 })
+            })
     }
     sendMessage = async () => {
         if (this.state.text.length > 0) {
-            let msgId = db.ref('messages').child(User.id).child(this.state.uid).push().key;
+            let msgId = firebase.database().ref('messages').child(user.id).child(this.state.uid).push().key;
             let updates = {};
             let message = {
                 _id: msgId,
                 text: this.state.text,
                 createdAt: firebase.database.ServerValue.TIMESTAMP,
                 user: {
-                    _id: User.id
+                    _id: user.id
                 }
             }
-            updates['messages/' + User.id + '/' + this.state.uid + '/' + msgId] = message;
-            updates['messages/' + this.state.uid + '/' + User.id + '/' + msgId] = message;
-            db.ref().update(updates)
+            updates['messages/' + user.id + '/' + this.state.uid + '/' + msgId] = message;
+            updates['messages/' + this.state.uid + '/' + user.id + '/' + msgId] = message;
+            firebase.database().ref().update(updates)
             this.setState({ text: '' })
 
         }
 
-        
+
     }
     render() {
         return (
@@ -53,7 +51,7 @@ export default class DetailChat extends Component {
                 messages={this.state.messagesList}
                 onSend={this.sendMessage}
                 user={{
-                    _id: User.id
+                    _id: user.id
                 }}
                 onInputTextChanged={(value) => this.setState({ text: value })}
             />

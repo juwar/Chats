@@ -1,5 +1,4 @@
 import firebase from 'firebase'; // 4.8.1
-let firebaseConfig
 
 class Fire {
     constructor() {

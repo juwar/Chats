@@ -40,7 +40,6 @@ class Login extends Component {
 
     onPressLogin = () =>
         this.props.navigation.navigate('Login');
-        // console.warn(find())
 
     render() {
         return (
