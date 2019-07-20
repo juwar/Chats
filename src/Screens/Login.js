@@ -7,11 +7,13 @@ import {
     ImageBackground,
     Image,
     TextInput,
+    AsyncStorage,
 } from "react-native";
 
 import { db, firebaseapp } from '../Api/Config';
 import { h, w, WIDTH, HEIGHT, totalSize } from '../Api/Dimesion'
 import { login } from '../Api/Services'
+import User from '../Api/User'
 
 import bgImage from '../Assets/background.png'
 import logo from '../Assets/companylogo.png'
@@ -23,6 +25,13 @@ class Login extends Component {
     state = {
         email: '',
         password: ''
+    }
+
+    successLogin = async (data) => {
+        let uid = data.user.uid
+        await AsyncStorage.setItem('uid', uid)
+        User.id = uid
+        this.props.navigation.navigate('Maps');
     }
 
     onPressLogin = async () => {
@@ -39,8 +48,9 @@ class Login extends Component {
         }
 
         try {
-            await firebaseapp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-            this.props.navigation.navigate('Maps');
+            await firebaseapp.auth()
+                .signInWithEmailAndPassword(this.state.email, this.state.password)
+                .then(this.successLogin)
         } catch (error) {
             alert('Email and password is false');
         }

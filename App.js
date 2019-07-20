@@ -29,7 +29,10 @@ import Chats from './src/Screens/Chats'
 import Maps from './src/Screens/Maps'
 import Login from './src/Screens/Login'
 import Register from './src/Screens/Register'
-import Services from './src/Api/Services'
+import Profile from './src/Screens/Profile'
+import ProfileFriends from './src/Screens/ProfileFriends'
+
+navigator.geolocation = require('@react-native-community/geolocation');	
 
 const AppNavigator = createStackNavigator({
 	Login: { screen: Login },
@@ -37,6 +40,8 @@ const AppNavigator = createStackNavigator({
 	Maps: { screen: Maps },
 	Main: { screen: Main },
 	Chats: { screen: Chats },
+	Profile: { screen: Profile },
+	ProfileFriends: { screen: ProfileFriends },
 },
 {
 	defaultNavigationOptions: {
