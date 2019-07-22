@@ -23,6 +23,7 @@ const CARD_WIDTH = CARD_HEIGHT - 50;
 class Maps extends Component {
 
     constructor(props) {
+        // console.disableYellowBox = true;
         super(props)
         this.state = {
             active: 'false',
@@ -35,6 +36,7 @@ class Maps extends Component {
             modalVisible: false,
         }
         this.getLocation()
+
     }
 
     onPressChats = () => {
@@ -44,7 +46,7 @@ class Maps extends Component {
         this.props.navigation.navigate('Chats', this.state.idF);
     }
 
-    onPressProfileFriend= () => {
+    onPressProfileFriend = () => {
         this.setState({
             modalVisible: false
         })
@@ -65,15 +67,21 @@ class Maps extends Component {
             (error) => this.setState({ error: error.message }),
             { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
         );
-        console.warn(User.id)
+        console.warn('get New Location')
     }
 
     componentWillMount() {
+    
+        setInterval(this.getLocation, 60000);
         this.index = 0;
         this.animation = new Animated.Value(0);
     }
 
+
     componentDidMount() {
+        // setInterval(getLocation(), 20000)
+        // console.ignoredYellowBox = true;
+
         db.ref('/user').on('value', (data) => {
             let values = data.val()
             if (values) {
@@ -208,7 +216,7 @@ class Maps extends Component {
                                     <Left>
                                         <Button transparent onPress={this.onPressProfileFriend}>
                                             <Icon active name="thumbs-up" />
-                                            <Text style={{fontSize:20}}>Profile</Text>
+                                            <Text style={{ fontSize: 20 }}>Profile</Text>
                                         </Button>
                                     </Left>
                                     <Body>
@@ -216,7 +224,7 @@ class Maps extends Component {
                                     <Right>
                                         <Button transparent onPress={this.onPressChats}>
                                             <Icon active name="chatbubbles" />
-                                            <Text style={{fontSize:20}}>Chat</Text>
+                                            <Text style={{ fontSize: 20 }}>Chat</Text>
 
                                         </Button>
                                     </Right>
