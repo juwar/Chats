@@ -8,7 +8,9 @@ import {
 } from 'react-native';
 import User from '../Api/User'
 import { db, firebaseapp } from '../Api/Config';
+import { updateUser} from '../Api/Services';
 import user from '../Api/User';
+import { Container, Header, Content, Form, Item, Input, Button } from 'native-base';
 
 export default class UserProfileView extends Component {
 
@@ -18,6 +20,7 @@ export default class UserProfileView extends Component {
             username: '',
             story: '',
             imgProfile: '',
+            imgProfileC: '',
             email: '',
             dataProfile: [],
         }
@@ -51,10 +54,6 @@ export default class UserProfileView extends Component {
                         <Text style={styles.userInfo}>{this.state.email}</Text>
                         <Text style={styles.userInfo}>{this.state.story}</Text>
                     </View>
-                </View>
-
-                <View style={styles.body}>
-                    
                 </View>
             </View>
         );

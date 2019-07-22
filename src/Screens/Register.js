@@ -7,6 +7,7 @@ import {
     ImageBackground,
     Image,
     TextInput,
+    SafeAreaView
 } from "react-native";
 
 import { h, w, WIDTH, HEIGHT, totalSize } from '../Api/Dimesion'
@@ -17,7 +18,7 @@ import bgImage from '../Assets/background.png'
 
 console.log(WIDTH)
 
-class Login extends Component {
+class Register extends Component {
 
     state = {
         username: '',
@@ -43,8 +44,8 @@ class Login extends Component {
 
     render() {
         return (
-            <ImageBackground source={bgImage} style={styles.container}>
-                <View style={styles.inputContainer}>
+            <SafeAreaView style={styles.background}>
+                <View>
                     <TextInput
                         style={styles.input}
                         placeholder={'Username'}
@@ -89,28 +90,32 @@ class Login extends Component {
                         style={styles.buttonRegister}
                         activeOpacity={0.6}
                     >
-                        <Text style={styles.login}>Sign Up</Text>
+                        <Text style={styles.register}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         onPress={this.onPressLogin}
-                        style={styles.buttonLogin}
                         activeOpacity={0.6}
                     >
-                        <Text style={styles.login}>Login</Text>
+                        <Text style={styles.login}>{'<'} Login</Text>
                     </TouchableOpacity>
                 </View>
-            </ImageBackground>
+            </SafeAreaView>
         );
     }
 }
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
+    },
+    background: {
+        backgroundColor: '#555555',
+        flex: 1,
         justifyContent: 'center',
     },
     logoContainer: {
@@ -138,7 +143,7 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(255,255,255,1.0)',
         fontSize: 16,
         paddingLeft: 45,
-        backgroundColor: 'rgba(255,255,255,0.25)',
+        backgroundColor: 'rgba(255,255,255,0.15)',
         color: 'rgba(255,255,255,1.0)',
         marginHorizontal: 25,
     },
@@ -147,13 +152,14 @@ const styles = StyleSheet.create({
     },
     buttonContainer2: {
         marginTop: 40,
+        alignItems: 'center',
     },
     buttonLogin: {
         width: WIDTH - 55,
         height: 45,
         borderRadius: 25,
         // borderWidth:2,
-        backgroundColor: 'rgba(0,128,255,1.0)',
+        backgroundColor: '#888888',
         alignItems: 'center'
     },
     buttonRegister: {
@@ -164,10 +170,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(153,51,255,1.0)',
         alignItems: 'center'
     },
-    login: {
+    register: {
         color: 'rgba(255,255,255,1.0)',
         fontWeight: '700',
         paddingVertical: h(1),
         fontSize: 20,
+    },
+    login: {
+        color: 'rgba(255,255,255,1.0)',
+        fontWeight: '500',
+        paddingVertical: h(1),
+        fontSize: 18,
+        alignSelf: 'flex-start',
+        paddingLeft: 27.5,
     },
 });

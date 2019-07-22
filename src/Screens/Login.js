@@ -8,6 +8,7 @@ import {
     Image,
     TextInput,
     AsyncStorage,
+    SafeAreaView,
 } from "react-native";
 
 import { db, firebaseapp } from '../Api/Config';
@@ -16,7 +17,7 @@ import { login } from '../Api/Services'
 import User from '../Api/User'
 
 import bgImage from '../Assets/background.png'
-import logo from '../Assets/companylogo.png'
+import logo from '../Assets/logoapp.png'
 
 console.log(WIDTH)
 
@@ -60,11 +61,7 @@ class Login extends Component {
 
     render() {
         return (
-            <ImageBackground source={bgImage} style={styles.container}>
-                <View style={styles.logoContainer}>
-                    <Image source={logo} style={styles.logo}></Image>
-                    {/* <Text style={styles.textlogo}>FRIEND ZONE</Text> */}
-                </View>
+            <SafeAreaView style={styles.background}>
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.input}
@@ -97,13 +94,12 @@ class Login extends Component {
                 <View style={styles.buttonContainer2}>
                     <TouchableOpacity
                         onPress={this.onPressRegister}
-                        style={styles.buttonRegister}
                         activeOpacity={0.6}
                     >
-                        <Text style={styles.login}>Sign Up</Text>
+                        <Text style={styles.register}>Sign Up {'>'}</Text>
                     </TouchableOpacity>
                 </View>
-            </ImageBackground>
+            </SafeAreaView >
         );
     }
 }
@@ -115,11 +111,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    background: {
+        backgroundColor: '#555555',
+        flex: 1,
+        justifyContent: 'center',
+    },
     logoContainer: {
         alignItems: 'center'
     },
     logo: {
-        width: WIDTH - (WIDTH / 2),
+        width: WIDTH - (WIDTH / 2) + 20,
         height: WIDTH - (WIDTH / 2),
     },
     textlogo: {
@@ -136,16 +137,17 @@ const styles = StyleSheet.create({
         width: WIDTH - 55,
         height: 45,
         borderRadius: 25,
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: 'rgba(255,255,255,1.0)',
         fontSize: 16,
         paddingLeft: 45,
-        backgroundColor: 'rgba(255,255,255,0.25)',
+        backgroundColor: 'rgba(255,255,255,0.15)',
         color: 'rgba(255,255,255,1.0)',
         marginHorizontal: 25,
     },
     buttonContainer: {
         marginTop: 40,
+        alignItems: 'center',
     },
     buttonContainer2: {
         marginTop: 20,
@@ -155,7 +157,7 @@ const styles = StyleSheet.create({
         height: 45,
         borderRadius: 25,
         // borderWidth:2,
-        backgroundColor: 'rgba(0,128,255,1.0)',
+        backgroundColor: '#888888',
         alignItems: 'center'
     },
     buttonRegister: {
@@ -171,5 +173,13 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         paddingVertical: h(1),
         fontSize: 20,
+    },
+    register: {
+        color: 'rgba(255,255,255,1.0)',
+        fontWeight: '500',
+        paddingVertical: h(1),
+        fontSize: 18,
+        alignSelf: 'flex-end',
+        paddingRight: 27.5,
     },
 });

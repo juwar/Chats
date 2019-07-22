@@ -31,18 +31,15 @@ export const register = async (username, email, password) => {
 }
 
 
-export const find = () => {
-    db.ref('/user').on('value', function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            let childKey = childSnapshot.val().username;
-            return childKey
-        });
-    });
-}
-
-export const sendGeo = async (latitude, longitude,uid) => {
+export const sendGeo = async (latitude, longitude, uid) => {
     await db.ref('user/' + uid).update({
         latitude: latitude,
         longitude: longitude,
+    });
+}
+
+export const updateUser = async (imgProfile, uid) => {
+    await db.ref('user/' + uid).update({
+        imgProfile: '',
     });
 }
