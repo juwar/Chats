@@ -4,19 +4,12 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    ImageBackground,
-    Image,
     TextInput,
-    SafeAreaView
+    SafeAreaView,
+    ScrollView,
 } from "react-native";
-
 import { h, w, WIDTH, HEIGHT, totalSize } from '../Api/Dimesion'
-
 import { register, find } from '../Api/Services'
-
-import bgImage from '../Assets/background.png'
-
-console.log(WIDTH)
 
 class Register extends Component {
 
@@ -139,7 +132,7 @@ const styles = StyleSheet.create({
         width: WIDTH - 55,
         height: 45,
         borderRadius: 25,
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: 'rgba(255,255,255,1.0)',
         fontSize: 16,
         paddingLeft: 45,
@@ -158,7 +151,6 @@ const styles = StyleSheet.create({
         width: WIDTH - 55,
         height: 45,
         borderRadius: 25,
-        // borderWidth:2,
         backgroundColor: '#888888',
         alignItems: 'center'
     },
@@ -166,8 +158,7 @@ const styles = StyleSheet.create({
         width: WIDTH - 55,
         height: 45,
         borderRadius: 25,
-        // borderWidth:2,
-        backgroundColor: 'rgba(153,51,255,1.0)',
+        backgroundColor: '#888888',
         alignItems: 'center'
     },
     register: {

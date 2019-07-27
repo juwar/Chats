@@ -62,6 +62,7 @@ class Login extends Component {
     render() {
         return (
             <SafeAreaView style={styles.background}>
+                <Text></Text>
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.input}
@@ -96,7 +97,7 @@ class Login extends Component {
                         onPress={this.onPressRegister}
                         activeOpacity={0.6}
                     >
-                        <Text style={styles.register}>Sign Up {'>'}</Text>
+                        <Text style={styles.register}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView >
@@ -156,7 +157,6 @@ const styles = StyleSheet.create({
         width: WIDTH - 55,
         height: 45,
         borderRadius: 25,
-        // borderWidth:2,
         backgroundColor: '#888888',
         alignItems: 'center'
     },
@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
         width: WIDTH - 55,
         height: 45,
         borderRadius: 25,
-        // borderWidth:2,
         backgroundColor: 'rgba(153,51,255,1.0)',
         alignItems: 'center'
     },
